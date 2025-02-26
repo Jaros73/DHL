@@ -8,13 +8,13 @@ public class Location
     public int Id { get; set; }
 
     [Required]
-    public required string Name { get; set; }
+    public required string Name { get; set; }  // Název lokace
 
-    public string? Address { get; set; }
+    public string? Address { get; set; }  // Volitelná adresa
 
     // Relace: Jedna lokace má více zaměstnanců (Many-To-Many)
-    public List<LocationAssignment> LocationAssignments { get; set; } = new List<LocationAssignment>();
+    public List<LocationAssignment> LocationAssignments { get; set; } = new();
 
     // Relace: Jedna lokace může mít více kurzů
-    public List<Course> Courses { get; set; } = new List<Course>();
+    public List<Course> Courses { get; set; } = new();
 }

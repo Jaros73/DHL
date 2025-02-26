@@ -8,15 +8,16 @@ public class LocationAssignment
     [Key]
     public int Id { get; set; }
 
+    [Required]
     [ForeignKey("Employee")]
     public int EmployeeId { get; set; }
+    public required Employee Employee { get; set; }  // Navigační vlastnost
 
-    public required Employee Employee { get; set; }
-
+    [Required]
     [ForeignKey("Location")]
     public int LocationId { get; set; }
+    public required Location Location { get; set; }  // Navigační vlastnost
 
-    public required Location Location { get; set; }
-
-    public required string Role { get; set; } // Např. "Manager", "Worker"
+    [Required]
+    public required string Role { get; set; }  // Např. "Manager", "Worker"
 }

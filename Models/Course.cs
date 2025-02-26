@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DHL.Models;
@@ -9,23 +10,16 @@ public class Course
     public int Id { get; set; }
 
     [Required]
-    public required string CourseCode { get; set; }
+    public required string CourseName { get; set; }  // Název kurzu
 
-    [Required]
-    public required DateTime DepartureDate { get; set; }
+    public string? Description { get; set; }  // Volitelný popis kurzu
 
-    [Required]
-    public required string Network { get; set; }
+    public DateTime StartDate { get; set; } = DateTime.UtcNow;  // Datum začátku kurzu
 
-    public int TransporterEnumId { get; set; } 
+    public DateTime? EndDate { get; set; }  // Datum ukončení (může být null)
 
-    public string? Seals { get; set; }
-
-    public TimeSpan? DeparturePlannedTime { get; set; }
-
-    // Relace: Každý kurz má jednu lokaci
+    // Cizí klíč na lokaci, kde se kurz koná
     [ForeignKey("Location")]
     public int LocationId { get; set; }
-
-    public required Location Location { get; set; }
+    public required Location Location { get; set; }  // Navigační vlastnost
 }

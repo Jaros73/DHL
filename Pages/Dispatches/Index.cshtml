@@ -1,0 +1,30 @@
+﻿@page
+@model DHL.Pages.Dispatches.IndexModel
+@{
+    ViewData["Title"] = "Dispatches";
+}
+
+<h2>Dispatches</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Order Number</th>
+            <th>Destination</th>
+            <th>Dispatch Date</th>
+            <th>User</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var dispatch in Model.Dispatches)
+        {
+            <tr>
+                <td>@dispatch.Id</td>
+                <td>@dispatch.OrderNumber</td>
+                <td>@dispatch.Destination</td>
+                <td>@dispatch.DispatchDate.ToString("yyyy-MM-dd")</td>
+                <td>@(dispatch.User != null ? dispatch.User.FullName : "N/A")</td>
+            </tr>
+        }
+    </tbody>
+</table>

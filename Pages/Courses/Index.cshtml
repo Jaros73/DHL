@@ -1,0 +1,26 @@
+﻿@page
+@model DHL.Pages.Courses.IndexModel
+@{
+    ViewData["Title"] = "Courses";
+}
+
+<h2>Courses</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Course Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var course in Model.Courses)
+        {
+            <tr>
+                <td>@course.Id</td>
+                <td>@course.CourseName</td>
+                <td>@course.Description</td>
+            </tr>
+        }
+    </tbody>
+</table>

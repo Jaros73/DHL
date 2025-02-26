@@ -1,24 +1,25 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DHL.Models;
-
-public class Dispatch
+namespace DHL.Models
 {
-    [Key]
-    public int Id { get; set; }
+    public class Dispatch
+    {
+        [Key]
+        public int Id { get; set; }
 
-    [Required]
-    public required string DispatcherName { get; set; }
+        [Required]
+        public required string OrderNumber { get; set; }  // Číslo objednávky
 
-    [Required]
-    public required DateTime DispatchDate { get; set; }
+        [Required]
+        public required string Destination { get; set; }  // Cílová destinace
 
-    public string Status { get; set; } = "Pending"; // Výchozí hodnota
+        public DateTime DispatchDate { get; set; } = DateTime.UtcNow;  // Datum odeslání
 
-    // Relace: Každý dispečink může být přiřazen k lokaci
-    [ForeignKey("Location")]
-    public int LocationId { get; set; }
-
-    public required Location Location { get; set; }
+        // Možné cizí klíče na uživatele (např. dispečer)
+        [ForeignKey("User")]
+        public int UserId { get; set; }
+        public User? User { get; set; }  // Navigační vlastnost
+    }
 }

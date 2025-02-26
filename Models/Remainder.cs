@@ -1,23 +1,25 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DHL.Models;
-
-public class Remainder
+namespace DHL.Models
 {
-    [Key]
-    public int Id { get; set; }
+    public class Remainder
+    {
+        [Key]
+        public int Id { get; set; }
 
-    [Required]
-    public required string ItemName { get; set; }
+        [Required]
+        public required string ItemName { get; set; }  // Název položky
 
-    public int Quantity { get; set; } = 0; // Výchozí hodnota pro Quantity
+        [Required]
+        public int Quantity { get; set; }  // Množství skladem
 
-    public string Status { get; set; } = "Čeká na doplnění"; // Výchozí hodnota pro Status
+        public DateTime LastUpdated { get; set; } = DateTime.UtcNow;  // Datum poslední aktualizace
 
-    // Relace: Každý zůstatek je přiřazen k lokaci
-    [ForeignKey("Location")]
-    public int LocationId { get; set; }
-
-    public required Location Location { get; set; }
+        // Cizí klíč na uživatele (kdo aktualizoval stav skladu)
+        [ForeignKey("User")]
+        public int UserId { get; set; }
+        public User? User { get; set; }  // Navigační vlastnost
+    }
 }

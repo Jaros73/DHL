@@ -1,23 +1,10 @@
-﻿<!DOCTYPE html>
-<html lang="cs">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="~/css/site.css" />
-</head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a asp-page="/Index">Domů</a></li>
-                <li><a asp-page="/Login">Přihlásit</a></li>
-                <li><a asp-page="/Logout">Odhlásit</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        @RenderBody()
-    </main>
-</body>
-</html>
+﻿@page
+@model DHL.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Vítejte v DHL systému</h1>
+    <p>Vyberte sekci z navigace.</p>
+</div>

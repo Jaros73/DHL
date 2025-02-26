@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Middleware\" />
-    <Folder Include="Pages\Shared\" />
     <Folder Include="Repositoires\" />
     <Folder Include="Services\" />
     <Folder Include="wwwroot\images\" />
@@ -23,6 +22,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.3.0" />
   </ItemGroup>
 
 </Project>

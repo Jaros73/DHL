@@ -1,23 +1,29 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DHL.Models;
-
-public class Machining
+namespace DHL.Models
 {
-    [Key]
-    public int Id { get; set; }
+    public class Machining
+    {
+        [Key]
+        public int Id { get; set; }
 
-    [Required]
-    public required string MachineName { get; set; }
+        [Required]
+        public required string MachineName { get; set; }  // Název stroje
 
-    [Required]
-    public required string ProcessType { get; set; } 
+        [Required]
+        public required string Operation { get; set; }  // Název operace
 
-    public TimeSpan? EstimatedTime { get; set; } // Může být volitelné
+        public DateTime StartTime { get; set; } = DateTime.UtcNow;  // Čas zahájení operace
 
-    [ForeignKey("Location")]
-    public int LocationId { get; set; }
+        public DateTime? EndTime { get; set; }  // Čas ukončení (může být null)
 
-    public required Location Location { get; set; }
+        public bool IsCompleted { get; set; } = false;  // Status dokončení
+
+        // Cizí klíč na uživatele (operátor stroje)
+        [ForeignKey("User")]
+        public int UserId { get; set; }
+        public User? User { get; set; }  // Navigační vlastnost
+    }
 }

@@ -1,24 +1,26 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DHL.Models;
-
-public class IrregularCourse
+namespace DHL.Models
 {
-    [Key]
-    public int Id { get; set; }
+    public class IrregularCourse
+    {
+        [Key]
+        public int Id { get; set; }
 
-    [Required]
-    public required string CourseCode { get; set; }
+        [Required]
+        public required string CourseName { get; set; }  // Název nepravidelného kurzu
 
-    [Required]
-    public required DateTime ScheduledDate { get; set; }
+        public string? Description { get; set; }  // Volitelný popis
 
-    public string? Reason { get; set; } // Důvod nepravidelného kurzu (může být null)
+        public DateTime StartDate { get; set; } = DateTime.UtcNow;  // Datum zahájení
 
-    // Relace: Každý nepravidelný kurz patří k lokaci
-    [ForeignKey("Location")]
-    public int LocationId { get; set; }
+        public DateTime? EndDate { get; set; }  // Datum ukončení (může být null)
 
-    public required Location Location { get; set; }
+        // Cizí klíč na uživatele (např. vedoucí kurzu)
+        [ForeignKey("User")]
+        public int UserId { get; set; }
+        public User? User { get; set; }  // Navigační vlastnost
+    }
 }

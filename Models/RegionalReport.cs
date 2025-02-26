@@ -1,24 +1,25 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DHL.Models;
-
-public class RegionalReport
+namespace DHL.Models
 {
-    [Key]
-    public int Id { get; set; }
+    public class RegionalReport
+    {
+        [Key]
+        public int Id { get; set; }
 
-    [Required]
-    public required DateTime ReportDate { get; set; }
+        [Required]
+        public required string RegionName { get; set; }  // Název regionu
 
-    [Required]
-    public required string Region { get; set; }
+        [Required]
+        public required string ReportContent { get; set; }  // Obsah hlášení
 
-    public string? Summary { get; set; } // Shrnutí může být volitelné
+        public DateTime ReportDate { get; set; } = DateTime.UtcNow;  // Datum hlášení
 
-    // Relace: Report patří určité lokaci
-    [ForeignKey("Location")]
-    public int LocationId { get; set; }
-
-    public required Location Location { get; set; }
+        // Cizí klíč na uživatele (osoba, která vytvořila hlášení)
+        [ForeignKey("User")]
+        public int UserId { get; set; }
+        public User? User { get; set; }  // Navigační vlastnost
+    }
 }

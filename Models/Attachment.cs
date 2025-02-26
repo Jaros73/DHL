@@ -1,22 +1,25 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-namespace DHL.Models;
 
-public class Attachment
+namespace DHL.Models
 {
-    [Key]
-    public int Id { get; set; }
+    public class Attachment
+    {
+        [Key]
+        public int Id { get; set; }
 
-    [Required]
-    public required string FileName { get; set; }
+        [Required]
+        public required string FileName { get; set; }  // Název souboru
 
-    public required string FileType { get; set; }
+        [Required]
+        public required string FilePath { get; set; }  // Cesta k souboru na serveru
 
-    public required byte[] FileData { get; set; }
+        public DateTime UploadedAt { get; set; } = DateTime.UtcNow;  // Datum nahrání
 
-    // Relace: Každá příloha může patřit k reportu
-    [ForeignKey("RegionalReport")]
-    public int RegionalReportId { get; set; }
-
-    public required RegionalReport RegionalReport { get; set; }
+        // Cizí klíč na uživatele (kdo soubor nahrál)
+        [ForeignKey("User")]
+        public int UserId { get; set; }
+        public User? User { get; set; }  // Navigační vlastnost
+    }
 }

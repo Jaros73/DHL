@@ -1,22 +1,27 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace DHL.Models;
-
-public class User
+namespace DHL.Models
 {
-    [Key]
-    public int Id { get; set; }
+    public class User
+    {
+        [Key]
+        public int Id { get; set; }
 
-    [Required]
-    public required string Name { get; set; }
+        [Required]
+        [MaxLength(100)]
+        public required string FullName { get; set; } = string.Empty; // Přidána výchozí hodnota
 
-    [Required, EmailAddress]
-    public required string Email { get; set; }
+        [Required]
+        [MaxLength(255)]
+        public required string Email { get; set; } = string.Empty; // Přidána výchozí hodnota
 
-    public required string PasswordHash { get; set; }
+        [Required]
+        public required string PasswordHash { get; set; } = string.Empty; // Přidána výchozí hodnota
 
-    public required string Role { get; set; }
+        [Required]
+        public required string Role { get; set; } = "User"; // Výchozí role
 
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    }
 }
-
